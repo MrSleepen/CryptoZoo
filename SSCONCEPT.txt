@@ -1,0 +1,40 @@
+Shapeshifting game.
+
+
+
+GamePlay
+DONKEY KONG COUNTRY
+side scrolling level based with over worlds. each world has a final boss that will use the new recently acuired transformation to kill it.
+will be save Areas in each world.  on lives out resets to last save. Level unlock order is linear, minus a few secret paths like super mario.
+secret area on maps to give more depth. Collect stuffing, Hay, or cotton balls around map at 100 +1 life.
+
+
+Good Vs Evil
+Threw out game the player will be given different ways to pass certain puzzle the easy and evil way, or the hard but good way. these choices
+will directly impact the players experiance, the more evil your choices the harder the ai becomes. but the puzzles are straight formward and simple
+ the better your choices the ai stays as it currently is. will not go down. But the good way takes significantly more time. at least triple.this will 
+also have and effect unknown to the player of the later game shapes unlocked EXM Snake vs mouse. and will be givens a choice of 4 endings.
+Pure good,semi good,semi evil,pure evil. when a path is chosen a symbol will appear on screen, one of a devil or angel letting the player know 
+what their action was.
+
+Main player
+The player is a berlap humanoid, He woke up  on a dark forest floor. that is all that is really know of him. all transformation are learn as he travel by 
+finding picture of different animals (or shapes). the player character is scared of fire and will not be able to go near flames. the destination of the character 
+is unknow until the end, subtle hints will be given threwout game to give players Slight history and let them make up their own story base of that.
+
+Ai
+The ai will be flame carrying humanoids, of a differnet variety. "undecided". it will be know from the first level their goal is to destroy all the shape shifter
+Will be many different varietys of them, some fly some jump some just stand and throw fire. ai will be mixed, but as the player makes more evil decicions harder 
+ai will take the plaace of the weaker. exm, flame throwing guy will be replace with a flamethower guy.
+
+Art
+Should be dark and gloomy, see example 1 with occasional glimspes of sun at end of levels to show the player is nearing the end. the character player is a berlap humanoid
+and all transformations will be berlap skinned. See example 2-3.
+
+Transformations
+regular form- capalbe of interacting with world objects
+Elephant- Heavy capable of moving large objects
+Bird- light can fly in windy areas
+Snake/mouse- can travel threw small passages
+lion,deer- Can jump very high
+shark/dolphin, can swim underwater
