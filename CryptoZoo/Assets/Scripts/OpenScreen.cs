@@ -6,7 +6,7 @@ public class OpenScreen : MonoBehaviour
 {
     public GameObject PlayScreen;
     public GameObject MainMenuScreen;
-    // Use this for initialization
+   //Funtion to Start Called from Button
     public void Play()
     {
         MainMenuScreen.SetActive(true);

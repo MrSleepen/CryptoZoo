@@ -13,19 +13,21 @@ public class Hunger : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //Local hunger == Player prefsHunger level, to reduce amount of time needed to call playerprefs
+
         HungerLocal = PlayerPrefs.GetInt("HungerLevel");
 
         Debug.Log(Happiness);
         FedXP = PlayerPrefs.GetInt("playerXP");
 
-        //Debug.Log(PlayerPrefs.GetInt("playerXP"));
-
+        
+        //if Monster has just been created, start with full hunger and toggle just born to false.
         if (JustBorn == true)
         {
             PlayerPrefs.SetInt("HungerLevel", 100);
             JustBorn = false;
         }
-
+        //if hunger level is above 0 run coroutine to subract hunger. use time to determine the amount of time between subraction.
         while(PlayerPrefs.GetInt("HungerLevel")>=0 && TimerTF == false){
             TimerTF = true;
             StartCoroutine(GettingHungry());
@@ -34,7 +36,7 @@ public class Hunger : MonoBehaviour {
 
     public IEnumerator GettingHungry()
     {
-        
+        //Wait For time and subtract health.
         PlayerPrefs.SetInt("HungerLevel", HungerLocal -=1);
         yield return new WaitForSeconds(1);
         TimerTF = false;
@@ -45,10 +47,10 @@ public class Hunger : MonoBehaviour {
 
         switch (collider.gameObject.name)
         {
-            
+                 ///////////////////////FOOD ITEMS COLLISION MENU////////////////////////        
 
             case "TestFood":
-
+                // Right Food Fed to This Creature + happiness + hunger + Player XP destroy Food
                 if (this.gameObject.name == "Monster1")
                 {
                     if (HungerLocal <=90)
@@ -62,9 +64,10 @@ public class Hunger : MonoBehaviour {
                     
                 }
                 else {
-                   
+                    // Wrong Food Fed to This Creature - happiness destroy Food
                     Destroy(collider.gameObject);
-                    //Happiness Down 
+                    Happiness -= 10;
+                    
                 }
                
                 break;
@@ -72,6 +75,7 @@ public class Hunger : MonoBehaviour {
 
 
             case "AnotherFood":
+                // Right Food Fed to This Creature + happiness + hunger + Player XP destroy Food
                 if (this.gameObject.name == "Monster2")
                 {
                       if (HungerLocal <= 90)
@@ -85,9 +89,10 @@ public class Hunger : MonoBehaviour {
                 }
                 else
                 {
-                   
+                    // Wrong Food Fed to This Creature - happiness destroy Food
                     Destroy(collider.gameObject);
-                    //Happiness Down 
+                    Happiness -= 10;
+                    
                 }
 
                 break;
