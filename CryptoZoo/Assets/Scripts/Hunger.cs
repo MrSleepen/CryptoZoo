@@ -8,11 +8,14 @@ public class Hunger : MonoBehaviour {
     private bool TimerTF = false;
     private int HungerLocal;
     private int FedXP = 100;
+    private int Happiness;
     
 
     // Update is called once per frame
     void Update () {
         HungerLocal = PlayerPrefs.GetInt("HungerLevel");
+
+        Debug.Log(Happiness);
         FedXP = PlayerPrefs.GetInt("playerXP");
 
         //Debug.Log(PlayerPrefs.GetInt("playerXP"));
@@ -31,7 +34,7 @@ public class Hunger : MonoBehaviour {
 
     public IEnumerator GettingHungry()
     {
-        Debug.Log(PlayerPrefs.GetInt("HungerLevel"));
+        
         PlayerPrefs.SetInt("HungerLevel", HungerLocal -=1);
         yield return new WaitForSeconds(1);
         TimerTF = false;
@@ -48,13 +51,18 @@ public class Hunger : MonoBehaviour {
 
                 if (this.gameObject.name == "Monster1")
                 {
-                    Debug.Log(PlayerPrefs.GetInt("playerXP"));
+                    if (HungerLocal <=90)
+                    {
+                        Happiness += 10;
+                    }
+                    
                     PlayerPrefs.SetInt("HungerLevel", 100);
                     Destroy(collider.gameObject);
                     PlayerPrefs.SetInt("playerXP", FedXP += 100);
+                    
                 }
                 else {
-                    Debug.Log("WRONGMOF");
+                   
                     Destroy(collider.gameObject);
                     //Happiness Down 
                 }
@@ -66,14 +74,18 @@ public class Hunger : MonoBehaviour {
             case "AnotherFood":
                 if (this.gameObject.name == "Monster2")
                 {
-                    Debug.Log(PlayerPrefs.GetInt("playerXP"));
+                      if (HungerLocal <= 90)
+                    {
+                        Happiness += 10;
+                    }
+                    
                     PlayerPrefs.SetInt("HungerLevel", 100);
                     Destroy(collider.gameObject);
                     PlayerPrefs.SetInt("playerXP", FedXP += 100);
                 }
                 else
                 {
-                    Debug.Log("WRONGMOF");
+                   
                     Destroy(collider.gameObject);
                     //Happiness Down 
                 }
