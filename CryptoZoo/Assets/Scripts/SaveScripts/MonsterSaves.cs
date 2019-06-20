@@ -8,7 +8,7 @@ public class MonsterSaves{
     public MonsterSaves (MonsterData monsterData)
     {
 
-        testhunger = monsterData.hunger;
+        testhunger = monsterData.Hunger;
     }
 
 }

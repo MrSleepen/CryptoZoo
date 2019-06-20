@@ -6,16 +6,20 @@ public class Hunger : MonoBehaviour {
 
     public bool JustBorn = false;
     private bool TimerTF = false;
-    private int HungerLocal;
+    public int HungerLocal;
     private int FedXP = 100;
     private int Happiness;
     
+    void start ()
+    {
+       // MonsterSaves data = SaveSystem.loadMonsters();
+    }
 
     // Update is called once per frame
     void Update () {
         //Local hunger == Player prefsHunger level, to reduce amount of time needed to call playerprefs
 
-        HungerLocal = PlayerPrefs.GetInt("HungerLevel");
+        HungerLocal =0 ;
 
         Debug.Log(Happiness);
         FedXP = PlayerPrefs.GetInt("playerXP");
