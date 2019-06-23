@@ -3,9 +3,8 @@
 
 public class MonsterSaves{
     //public int testhunger;
-    public int[] bordumArray;
-
-    public int[] hungerArray;
+    public float[] boredomArray;
+    public float[] hungerArray;
 
    
     public MonsterSaves (GameManager gameManager)
@@ -15,7 +14,7 @@ public class MonsterSaves{
         //bordum = monsterData.Bordum;
 
         hungerArray = gameManager.localHunger;
-        bordumArray = gameManager.localBoredom;
+        boredomArray = gameManager.localBoredom;
         
     }
 

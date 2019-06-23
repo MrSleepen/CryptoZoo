@@ -33,10 +33,10 @@ public class GameManager : MonoBehaviour
     public Transform xpNotification;
 
     public List<GameObject> monsterList;
-    public int[] localHunger;
-    public int[] localBoredom;
-    private int[] loadedHunger;
-    private int[] loadedBoredom;
+    public float[] localHunger;
+    public float[] localBoredom;
+    private float[] loadedHunger;
+    private float[] loadedBoredom;
 
     public void Start()
     {
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     public void GetData()
     {
         loadedHunger = SaveSystem.loadMonsters().hungerArray;
-        loadedBoredom = SaveSystem.loadMonsters().bordumArray;
+        loadedBoredom = SaveSystem.loadMonsters().boredomArray;
 
         for (int i = 0; i < monsterList.Count; i++)
         {
@@ -80,15 +80,15 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < monsterList.Count; i++)
         {
             print("Added Hunger to monster " + i);
-            monsterList[i].GetComponent<MonsterData>().Bordum = loadedBoredom[i];
+            monsterList[i].GetComponent<MonsterData>().Boredom = loadedBoredom[i];
         }
     }
 
     public void SetData()
     {
         //setting length of array = length of list in GameManager
-        localHunger = new int[monsterList.Count];
-        localBoredom = new int[monsterList.Count];
+        localHunger = new float[monsterList.Count];
+        localBoredom = new float[monsterList.Count];
         for (int i = 0; i < localHunger.Length; i++)
         {
             //setting array int values to = hunger in the same oder as the list
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < localBoredom.Length; i++)
         {
             //setting array int values to = hunger in the same oder as the list
-            localBoredom[i] = monsterList[i].GetComponent<MonsterData>().Bordum;
+            localBoredom[i] = monsterList[i].GetComponent<MonsterData>().Boredom;
 
         }
 
