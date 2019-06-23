@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem{
 
-    public static void SaveMonster(MonsterData monsters)
+    public static void SaveMonster(GameManager monsters)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.fun";
@@ -35,9 +35,5 @@ public static class SaveSystem{
             Debug.LogError("Save file not found in " + path);
             return null;
         }
-
-
-
     }
-
 }

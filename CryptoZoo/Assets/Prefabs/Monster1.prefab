@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114088381393450532}
   m_Layer: 0
   m_Name: Monster1
-  m_TagString: Untagged
+  m_TagString: monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JustBorn: 0
+  HungerLocal: 0
 --- !u!114 &114151856247418232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JustBorn: 0
+  HungerLocal: 0
 --- !u!212 &212208222591855352
 SpriteRenderer:
   m_ObjectHideFlags: 1

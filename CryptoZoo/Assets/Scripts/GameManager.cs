@@ -32,6 +32,24 @@ public class GameManager : MonoBehaviour
     public Transform levelNotification;
     public Transform xpNotification;
 
+    public List<GameObject> monsterList;
+    public int[] localHunger;
+    public int[] localBoredom;
+    private int[] loadedHunger;
+    private int[] loadedBoredom;
+
+    public void Start()
+    {
+        monsterList = new List<GameObject>(GameObject.FindGameObjectsWithTag("monster"));
+        
+        GetData();
+    }
+
+    public void FixedUpdate()
+    {
+        SetData();
+    }
+
     public void addPlayerXP(int experience)
     {
         var localXP = PlayerPrefs.GetInt("playerXP");
@@ -49,6 +67,44 @@ public class GameManager : MonoBehaviour
             levelText.GetComponent<ScrollingText>().Initilize(30, transform.up, "Level Up!", 2);
         }
     }
+    public void GetData()
+    {
+        loadedHunger = SaveSystem.loadMonsters().hungerArray;
+        loadedBoredom = SaveSystem.loadMonsters().bordumArray;
+
+        for (int i = 0; i < monsterList.Count; i++)
+        {
+            print("Added Hunger to monster " + i);
+            monsterList[i].GetComponent<MonsterData>().Hunger = loadedHunger[i];
+        }
+        for (int i = 0; i < monsterList.Count; i++)
+        {
+            print("Added Hunger to monster " + i);
+            monsterList[i].GetComponent<MonsterData>().Bordum = loadedBoredom[i];
+        }
+    }
+
+    public void SetData()
+    {
+        //setting length of array = length of list in GameManager
+        localHunger = new int[monsterList.Count];
+        localBoredom = new int[monsterList.Count];
+        for (int i = 0; i < localHunger.Length; i++)
+        {
+            //setting array int values to = hunger in the same oder as the list
+            localHunger[i] = monsterList[i].GetComponent<MonsterData>().Hunger;
+            
+        }
+        for (int i = 0; i < localBoredom.Length; i++)
+        {
+            //setting array int values to = hunger in the same oder as the list
+            localBoredom[i] = monsterList[i].GetComponent<MonsterData>().Bordum;
+
+        }
+
+        SaveSystem.SaveMonster(this);
+    }
+    
 
 }
 
