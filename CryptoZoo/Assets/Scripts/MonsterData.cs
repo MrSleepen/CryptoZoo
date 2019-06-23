@@ -1,17 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MonsterData : MonoBehaviour
 {
     public bool JustBorn = false;
-    private bool TimerTF = false;
-    public int Hunger;
-    public int Bordum;
-    private int FedXP = 100;
-    private int Happiness;
+    public bool TimerTF = false;
 
 
+    //UI Elements
+    public GameObject CreatureattsMenu;
+    public Slider Hungerslider;
+    public Slider BoredumSlider;
+    public Slider Happinessslider;
+
+
+
+    //Monster Attributes
+    private float Happiness;
+    public float Hunger;
+    public float Boredom;
+    private float totHunger;
+    private float totBoredom;
+    private float NumOfAtts = 2;
     void start()
     {
         
@@ -25,25 +36,28 @@ public class MonsterData : MonoBehaviour
             Debug.LogError("Creating Save");
             SaveSystem.SaveMonster(GameManager.Instance);
         }
-        //MonsterSaves data = SaveSystem.loadMonsters();
-
-        //Hunger = data.testhunger;
-        //Bordum = data.bordum;
 
         Debug.Log("Hunger is" + Hunger);
-        Debug.Log("Bordum is" + Bordum);
-        FedXP = PlayerPrefs.GetInt("playerXP");
+        Debug.Log("Bordum is" + Boredom);
         //if Monster has just been created, start with full hunger and toggle just born to false.
         if (JustBorn == true)
         {
-            Hunger = 100;
-            Bordum = 0;
+            Hunger = 1f;
+            Boredom = 1f;
             SaveSystem.SaveMonster(GameManager.Instance);
             JustBorn = false;
-
         }
+
+        totHunger = Hunger / NumOfAtts;
+        totBoredom = Boredom / NumOfAtts;
+        Happiness = totBoredom + totHunger;
+        Hungerslider.value = Hunger;
+        BoredumSlider.value = Boredom;
+        Happinessslider.value = Happiness;
+       
         //if hunger level is above 0 run coroutine to subract hunger. use time to determine the amount of time between subraction.
-        if(TimerTF == false)
+
+        if (TimerTF == false)
         {
             StartCoroutine(runTimedEvents());
         }
@@ -52,7 +66,7 @@ public class MonsterData : MonoBehaviour
     public IEnumerator runTimedEvents()
     {
         TimerTF = true;
-        
+
         yield return new WaitForSeconds(1);
         if (Hunger >= 1)
         {
@@ -60,9 +74,9 @@ public class MonsterData : MonoBehaviour
             SaveSystem.SaveMonster(GameManager.Instance);
             TimerTF = false;
         }
-        if (Bordum <= 99)
+        if (Boredom <= 99)
         {
-            Bordum += 1;
+            Boredom += 1;
             SaveSystem.SaveMonster(GameManager.Instance);
             TimerTF = false;
         }
@@ -78,21 +92,23 @@ public class MonsterData : MonoBehaviour
                 // Right Food Fed to This Creature + happiness + hunger + Player XP destroy Food
                 if (this.gameObject.name == "Monster1")
                 {
+
                     if (Hunger <= 90)
                     {
                         Happiness += 10;
                     }
                     Hunger = 100;
                     SaveSystem.SaveMonster(GameManager.Instance);
-                    Destroy(collider.gameObject);
-                    PlayerPrefs.SetInt("playerXP", FedXP += 100);
-                }
 
+                    Destroy(collider.gameObject);
+                
+                }
                 else
                 {
                     // Wrong Food Fed to This Creature - happiness destroy Food
                     Destroy(collider.gameObject);
-                    Happiness -= 10;
+                    Hunger -= .2f;
+                    SaveSystem.SaveMonster(GameManager.Instance);
                 }
 
                 break;
@@ -108,21 +124,32 @@ public class MonsterData : MonoBehaviour
 
                     Hunger = 100;
                     SaveSystem.SaveMonster(GameManager.Instance);
-                    Destroy(collider.gameObject);
-                    PlayerPrefs.SetInt("playerXP", FedXP += 100);
-                }
 
+                    Destroy(collider.gameObject);
+                }
                 else
                 {
                     // Wrong Food Fed to This Creature - happiness destroy Food
                     Destroy(collider.gameObject);
-                    Happiness -= 10;
+                    Hunger -= .2f;
+                    SaveSystem.SaveMonster(GameManager.Instance);
 
                 }
 
                 break;
 
 
+        }
+    }
+    public void PlayWith()
+    {
+        if(Boredom <= .85f) {
+            Boredom = 1f;
+        SaveSystem.SaveMonster(GameManager.Instance);
+        }
+        else if (Boredom > .85f)
+        {
+            Debug.Log("Baby Does Not want to play");
         }
     }
 }
