@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MonsterData : MonoBehaviour
 {
+
     public bool JustBorn = false;
     public bool TimerTF = false;
 
@@ -15,7 +16,6 @@ public class MonsterData : MonoBehaviour
     public Slider Happinessslider;
 
 
-
     //Monster Attributes
     private float Happiness;
     public float Hunger;
@@ -25,61 +25,63 @@ public class MonsterData : MonoBehaviour
     private float NumOfAtts = 2;
     void start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SaveSystem.loadMonsters() == null)
-        {
-            Debug.LogError("Creating Save");
-            SaveSystem.SaveMonster(GameManager.Instance);
-        }
+        MonsterSaves data = SaveSystem.loadMonsters();
 
-        Debug.Log("Hunger is" + Hunger);
-        Debug.Log("Bordum is" + Boredom);
-        //if Monster has just been created, start with full hunger and toggle just born to false.
         if (JustBorn == true)
         {
             Hunger = 1f;
             Boredom = 1f;
             SaveSystem.SaveMonster(GameManager.Instance);
             JustBorn = false;
+
         }
 
+        //Hunger = data.testhunger;
+        //Boredom = data.bordum;
         totHunger = Hunger / NumOfAtts;
         totBoredom = Boredom / NumOfAtts;
         Happiness = totBoredom + totHunger;
         Hungerslider.value = Hunger;
         BoredumSlider.value = Boredom;
         Happinessslider.value = Happiness;
-       
-        //if hunger level is above 0 run coroutine to subract hunger. use time to determine the amount of time between subraction.
 
+
+
+
+        //if Monster has just been created, start with full hunger and toggle just born to false.
+
+        //if hunger level is above 0 run coroutine to subract hunger. use time to determine the amount of time between subraction.
         if (TimerTF == false)
         {
             StartCoroutine(runTimedEvents());
         }
     }
-
+    // Run Time Events
     public IEnumerator runTimedEvents()
     {
         TimerTF = true;
 
         yield return new WaitForSeconds(1);
-        if (Hunger >= 1)
+        if (Hunger >= .01f)
         {
-            Hunger -= 1;
+            Hunger -= .01f;
             SaveSystem.SaveMonster(GameManager.Instance);
             TimerTF = false;
         }
-        if (Boredom <= 99)
+
+        if (Boredom >= .01f)
         {
-            Boredom += 1;
+            Boredom -= .01f;
             SaveSystem.SaveMonster(GameManager.Instance);
             TimerTF = false;
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
@@ -93,16 +95,12 @@ public class MonsterData : MonoBehaviour
                 if (this.gameObject.name == "Monster1")
                 {
 
-                    if (Hunger <= 90)
-                    {
-                        Happiness += 10;
-                    }
-                    Hunger = 100;
+                    Hunger = 1;
                     SaveSystem.SaveMonster(GameManager.Instance);
-
                     Destroy(collider.gameObject);
-                
+
                 }
+
                 else
                 {
                     // Wrong Food Fed to This Creature - happiness destroy Food
@@ -117,16 +115,13 @@ public class MonsterData : MonoBehaviour
                 // Right Food Fed to This Creature + happiness + hunger + Player XP destroy Food
                 if (this.gameObject.name == "Monster2")
                 {
-                    if (Hunger <= 90)
-                    {
-                        Happiness += 10;
-                    }
 
-                    Hunger = 100;
+                    Hunger = 1;
                     SaveSystem.SaveMonster(GameManager.Instance);
-
                     Destroy(collider.gameObject);
+
                 }
+
                 else
                 {
                     // Wrong Food Fed to This Creature - happiness destroy Food
@@ -143,9 +138,10 @@ public class MonsterData : MonoBehaviour
     }
     public void PlayWith()
     {
-        if(Boredom <= .85f) {
+        if (Boredom <= .85f)
+        {
             Boredom = 1f;
-        SaveSystem.SaveMonster(GameManager.Instance);
+            SaveSystem.SaveMonster(GameManager.Instance);
         }
         else if (Boredom > .85f)
         {
@@ -153,3 +149,4 @@ public class MonsterData : MonoBehaviour
         }
     }
 }
+
