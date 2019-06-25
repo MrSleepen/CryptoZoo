@@ -7,6 +7,7 @@ public class MonsterData : MonoBehaviour
 
     public bool JustBorn = false;
     public bool TimerTF = false;
+    public string monsterType;
 
 
     //UI Elements
@@ -23,15 +24,16 @@ public class MonsterData : MonoBehaviour
     private float totHunger;
     private float totBoredom;
     private float NumOfAtts = 2;
-    void start()
-    {
 
+    void Start()
+    {
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        MonsterSaves data = SaveSystem.loadMonsters();
 
         if (JustBorn == true)
         {
@@ -52,7 +54,17 @@ public class MonsterData : MonoBehaviour
         Happinessslider.value = Happiness;
 
 
-
+        //This obsurd check can be replaced by name when proper monster names are given such as "if(gameObject.name == "Zombie")
+        if (gameObject.name == "Monster1")
+        {
+            monsterType = "Monster1";
+            print("Saving monster 1");
+        }
+        else if (gameObject.name == "Monster2")
+        {
+            monsterType = "Monster2";
+            print("Saving monster 2");
+        }
 
         //if Monster has just been created, start with full hunger and toggle just born to false.
 

@@ -32,22 +32,30 @@ public class GameManager : MonoBehaviour
     public Transform levelNotification;
     public Transform xpNotification;
 
+    public GameObject Monster1Prefab;
+    public GameObject Monster2Prefab;
+
     public List<GameObject> monsterList;
+    public int[] monsterNumValue;
     public float[] localHunger;
     public float[] localBoredom;
+    public int[] loadedMonsterNumValue;
     private float[] loadedHunger;
     private float[] loadedBoredom;
 
     public void Start()
     {
         monsterList = new List<GameObject>(GameObject.FindGameObjectsWithTag("monster"));
-        
+        GetMonsters();
         GetData();
+        
     }
 
     public void FixedUpdate()
     {
+        monsterList = new List<GameObject>(GameObject.FindGameObjectsWithTag("monster"));
         SetData();
+        SetMonsters();
     }
 
     public void addPlayerXP(int experience)
@@ -79,7 +87,7 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < monsterList.Count; i++)
         {
-            print("Added Hunger to monster " + i);
+            print("Added boredom to monster " + i);
             monsterList[i].GetComponent<MonsterData>().Boredom = loadedBoredom[i];
         }
     }
@@ -103,6 +111,48 @@ public class GameManager : MonoBehaviour
         }
 
         SaveSystem.SaveMonster(this);
+    }
+
+    public void GetMonsters()
+    {
+        loadedMonsterNumValue = SaveSystem.loadMonsters().monsterNumValue;
+        Spawn();
+        
+    }
+
+    public void SetMonsters()
+    {
+        
+        monsterNumValue = new int[monsterList.Count];
+        for(int i = 0; i < monsterList.Count; i++)
+        {
+            if(monsterList[i].gameObject.GetComponent<MonsterData>().monsterType == "Monster1")
+            {
+                monsterNumValue[i] = 1;
+            }
+            else if(monsterList[i].gameObject.GetComponent<MonsterData>().monsterType == "Monster2")
+            {
+                monsterNumValue[i] = 2;
+            }
+        }
+        SaveSystem.SaveMonster(this);
+    }
+
+    public void Spawn()
+    {
+        for (int i = 0; i < loadedMonsterNumValue.Length; i++)
+        {
+            if (loadedMonsterNumValue[i] == 1)
+            {
+                var clone = Instantiate(Monster1Prefab);
+                clone.name = "Monster1";
+            }
+            else if (loadedMonsterNumValue[i] == 2)
+            {
+                var clone = Instantiate(Monster2Prefab);
+                clone.name = "Monster2";
+            }
+        }
     }
     
 
