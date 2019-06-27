@@ -17,7 +17,7 @@ public class monsterManager : MonoBehaviour {
     public void Spawn()
     {
         GameManager gameManager = GameManager.Instance;
-        for(int i = 0; i < gameManager.monsterList.Count; i++)
+        for(int i = 0; i < gameManager.loadedMonsterNumValue.Length; i++)
         {
             if(gameManager.loadedMonsterNumValue[i] == 1)
             {
