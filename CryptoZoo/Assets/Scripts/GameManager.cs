@@ -45,10 +45,9 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        Spawn();
         monsterList = new List<GameObject>(GameObject.FindGameObjectsWithTag("monster"));
-        GetMonsters();
         GetData();
-        
     }
 
     public void FixedUpdate()
@@ -113,13 +112,6 @@ public class GameManager : MonoBehaviour
         SaveSystem.SaveMonster(this);
     }
 
-    public void GetMonsters()
-    {
-        loadedMonsterNumValue = SaveSystem.loadMonsters().monsterNumValue;
-        Spawn();
-        
-    }
-
     public void SetMonsters()
     {
         
@@ -140,6 +132,7 @@ public class GameManager : MonoBehaviour
 
     public void Spawn()
     {
+        loadedMonsterNumValue = SaveSystem.loadMonsters().monsterNumValue;
         for (int i = 0; i < loadedMonsterNumValue.Length; i++)
         {
             if (loadedMonsterNumValue[i] == 1)
