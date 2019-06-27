@@ -769,11 +769,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JustBorn: 0
   TimerTF: 0
+  monsterType: 
   CreatureattsMenu: {fileID: 1361745548379910}
   Hungerslider: {fileID: 114331640094214548}
   BoredumSlider: {fileID: 114342039929551368}
   Happinessslider: {fileID: 114439190088377878}
-  Hunger: 100
+  Hunger: 1
   Boredom: 0
 --- !u!114 &114518082842231914
 MonoBehaviour:
@@ -1263,7 +1264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.01, y: 3.47}
+  m_AnchoredPosition: {x: 4.0895796, y: 0.12592602}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.49154606, y: 0.48713538}
 --- !u!224 &224163167053268756
