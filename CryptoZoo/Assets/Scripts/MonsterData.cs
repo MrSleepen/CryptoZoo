@@ -11,6 +11,7 @@ public class MonsterData : MonoBehaviour
 
 
     //UI Elements
+    public GameObject Creature;
     public GameObject CreatureattsMenu;
     public Slider Hungerslider;
     public Slider BoredumSlider;
@@ -21,6 +22,8 @@ public class MonsterData : MonoBehaviour
     private float Happiness;
     public float Hunger;
     public float Boredom;
+    public float GrowthRate = 2;
+    public float Size = 1f;
     private float totHunger;
     private float totBoredom;
     private float NumOfAtts = 2;
@@ -34,7 +37,8 @@ public class MonsterData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(GrowthRate);
+       
         if (JustBorn == true)
         {
             Hunger = 1f;
@@ -52,7 +56,13 @@ public class MonsterData : MonoBehaviour
         Hungerslider.value = Hunger;
         BoredumSlider.value = Boredom;
         Happinessslider.value = Happiness;
+        GrowthRate = Happiness;
 
+
+        Vector3 theScale = transform.localScale;
+        theScale.y = Size;
+        theScale.x = Size;
+        transform.localScale = theScale;
 
         //This obsurd check can be replaced by name when proper monster names are given such as "if(gameObject.name == "Zombie")
         if (gameObject.name == "Monster1")
@@ -66,13 +76,16 @@ public class MonsterData : MonoBehaviour
             print("Saving monster 2");
         }
 
-        //if Monster has just been created, start with full hunger and toggle just born to false.
+ 
 
-        //if hunger level is above 0 run coroutine to subract hunger. use time to determine the amount of time between subraction.
         if (TimerTF == false)
         {
             StartCoroutine(runTimedEvents());
         }
+
+
+        
+
     }
     // Run Time Events
     public IEnumerator runTimedEvents()
@@ -86,6 +99,10 @@ public class MonsterData : MonoBehaviour
             SaveSystem.SaveMonster(GameManager.Instance);
             TimerTF = false;
         }
+        else
+        {
+            Hunger = 0;
+        }
 
         if (Boredom >= .01f)
         {
@@ -93,6 +110,19 @@ public class MonsterData : MonoBehaviour
             SaveSystem.SaveMonster(GameManager.Instance);
             TimerTF = false;
         }
+        else
+        {
+            Boredom = 0;
+        }
+        if(Size <= 1f)
+        {
+            Size += GrowthRate /100;
+        }
+        else
+        {
+            Size = 1;
+        }
+
 
     }
 
