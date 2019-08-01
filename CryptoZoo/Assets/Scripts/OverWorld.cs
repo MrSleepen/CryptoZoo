@@ -9,6 +9,8 @@ public class OverWorld : MonoBehaviour {
     public GameObject Arena;
     public GameObject GraveYard;
     public GameObject Overworld;
+    public GameObject Crib;
+    public GameObject WorkBench;
   //Function to open Lab called from lab button
     public void LabLoad()
     {
@@ -39,7 +41,43 @@ public class OverWorld : MonoBehaviour {
         GraveYard.SetActive(true);
         Overworld.SetActive(false);
     }
-  
-    // Use this for initialization
 
+    // Use this for initialization
+    public void CribLoad()
+    {
+        Crib.SetActive(true);
+        Lab.SetActive(false);
+    }
+    public void WorkBenchLoad()
+    {
+        WorkBench.SetActive(true);
+        Lab.SetActive(false);
+    }
+
+    public void BackToOverWorld()
+    {
+
+        WorkBench.SetActive(false);
+        Lab.SetActive(false);
+        Crib.SetActive(false);
+        GraveYard.SetActive(false);
+        Arena.SetActive(false);
+        MissionBoard.SetActive(false);
+        Market.SetActive(false);
+        Lab.SetActive(false);
+        Overworld.SetActive(true);
+    }
+    public void BackToLab()
+    {
+
+        WorkBench.SetActive(false);
+        Lab.SetActive(false);
+        Crib.SetActive(false);
+        GraveYard.SetActive(false);
+        Arena.SetActive(false);
+        MissionBoard.SetActive(false);
+        Market.SetActive(false);
+        Lab.SetActive(true);
+        Overworld.SetActive(false);
+    }
 }
