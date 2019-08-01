@@ -8,6 +8,7 @@ public class MonsterData : MonoBehaviour
     public bool JustBorn = false;
     public bool TimerTF = false;
     public string monsterType;
+    private bool fullGrownchecked;
 
 
     //UI Elements
@@ -121,6 +122,11 @@ public class MonsterData : MonoBehaviour
         else
         {
             Size = 1;
+            if(fullGrownchecked == false)
+            {
+                GameManager.Instance.addPlayerXP(500);
+                fullGrownchecked = true;
+            }
         }
 
 
