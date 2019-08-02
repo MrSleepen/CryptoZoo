@@ -59,19 +59,26 @@ public class GameManager : MonoBehaviour
 
     public void addPlayerXP(int experience)
     {
-        var localXP = PlayerPrefs.GetInt("playerXP");
-        var localLevel = PlayerPrefs.GetInt("playerLevel");
-        PlayerPrefs.SetInt("playerXP", localXP += experience);
-        Text xpText = Instantiate(scrollingTextPrefab, xpNotification.transform);
-        xpText.GetComponent<ScrollingText>().Initilize(10, transform.up, "+" + experience, 2);
-        if (PlayerPrefs.GetInt("playerXP") > PlayerPrefs.GetInt("playerXPMax"))
+        if (xpNotification != null)
         {
-            print("LEVEL");
-            PlayerPrefs.SetInt("playerLevel", localLevel += 1);
-            PlayerPrefs.SetInt("playerXP", localXP -= 1000);
+            var localXP = PlayerPrefs.GetInt("playerXP");
+            var localLevel = PlayerPrefs.GetInt("playerLevel");
+            PlayerPrefs.SetInt("playerXP", localXP += experience);
+            Text xpText = Instantiate(scrollingTextPrefab, xpNotification.transform);
+            xpText.GetComponent<ScrollingText>().Initilize(10, transform.up, "+" + experience, 2);
+            if (PlayerPrefs.GetInt("playerXP") > PlayerPrefs.GetInt("playerXPMax"))
+            {
+                print("LEVEL");
+                PlayerPrefs.SetInt("playerLevel", localLevel += 1);
+                PlayerPrefs.SetInt("playerXP", localXP -= 1000);
 
-            Text levelText = Instantiate(scrollingTextPrefab, levelNotification.transform);
-            levelText.GetComponent<ScrollingText>().Initilize(30, transform.up, "Level Up!", 2);
+                Text levelText = Instantiate(scrollingTextPrefab, levelNotification.transform);
+                levelText.GetComponent<ScrollingText>().Initilize(30, transform.up, "Level Up!", 2);
+            }
+        }
+        else
+        {
+            return;
         }
     }
     public void GetData()

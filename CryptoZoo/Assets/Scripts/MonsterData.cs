@@ -24,7 +24,7 @@ public class MonsterData : MonoBehaviour
     public float Hunger;
     public float Boredom;
     public float GrowthRate = 2;
-    public float Size = 1f;
+    public float Size = .01f;
     private float totHunger;
     private float totBoredom;
     private float NumOfAtts = 2;

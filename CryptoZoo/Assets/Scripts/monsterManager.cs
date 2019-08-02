@@ -9,10 +9,6 @@ public class monsterManager : MonoBehaviour {
     public int MonsterNumber = 1;
     // Use this for initialization
 
-    void Update()
-    {
-        Debug.Log("dasdas");
-    }
 
     public void Spawn()
     {
