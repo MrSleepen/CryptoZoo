@@ -9,6 +9,7 @@ public class MonsterData : MonoBehaviour
     public bool TimerTF = false;
     public string monsterType;
     private bool fullGrownchecked;
+    public float timer;
 
 
     //UI Elements
@@ -31,16 +32,19 @@ public class MonsterData : MonoBehaviour
     private float TestFloat;
     void Start()
     {
-        
-        
+        //timer = 300;
+        //timer -= TimeMaster.instance.CheckDate();
     }
 
     // Update is called once per frame
     void Update()
     {
-         
-       
-       
+Debug.Log(timer);
+
+        //timer -= Time.deltaTime;
+        //TimeMaster.instance.SaveDate();
+
+
         if (JustBorn == true)
         {
             Hunger = 1f;
@@ -131,17 +135,17 @@ public class MonsterData : MonoBehaviour
          if(Size <= .33f && Size >=0)
         {
              Size += GrowthRate /100;
-            Debug.Log("Stage1");
+            //Debug.Log("Stage1");
         }
          else if (Size <= .66f && Size >= .33f)
         {
              Size += GrowthRate / 150;
-            Debug.Log("Stage2");
+            //Debug.Log("Stage2");
         }
          else if (Size <= 1f && Size >= .66f)
         {
              Size += GrowthRate / 250;
-            Debug.Log("Stage3");
+            //Debug.Log("Stage3");
         }
         else
         {

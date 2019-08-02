@@ -91,17 +91,17 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < monsterList.Count; i++)
         {
-            print("Added Hunger to monster " + i);
+            //print("Added Hunger to monster " + i);
             monsterList[i].GetComponent<MonsterData>().Hunger = loadedHunger[i];
         }
         for (int i = 0; i < monsterList.Count; i++)
         {
-            print("Added boredom to monster " + i);
+            //print("Added boredom to monster " + i);
             monsterList[i].GetComponent<MonsterData>().Boredom = loadedBoredom[i];
         }
         for (int i = 0; i < monsterList.Count; i++)
         {
-            print("Added boredom to monster " + i);
+            //print("Added boredom to monster " + i);
             monsterList[i].GetComponent<MonsterData>().Size = loadedSize[i];
         }
     }

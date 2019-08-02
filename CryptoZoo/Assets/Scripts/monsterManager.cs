@@ -7,6 +7,8 @@ public class monsterManager : MonoBehaviour {
     public GameObject Monster1Prefab;
     public GameObject Monster2Prefab;
     public int MonsterNumber = 1;
+    public int[] Partslist;
+
     // Use this for initialization
 
 
