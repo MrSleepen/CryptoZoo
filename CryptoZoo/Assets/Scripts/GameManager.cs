@@ -39,9 +39,11 @@ public class GameManager : MonoBehaviour
     public int[] monsterNumValue;
     public float[] localHunger;
     public float[] localBoredom;
+    public float[] localSize;
     public int[] loadedMonsterNumValue;
     private float[] loadedHunger;
     private float[] loadedBoredom;
+    private float[] loadedSize;
 
     public void Start()
     {
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         loadedHunger = SaveSystem.loadMonsters().hungerArray;
         loadedBoredom = SaveSystem.loadMonsters().boredomArray;
+        loadedSize = SaveSystem.loadMonsters().monsterSize;
 
         for (int i = 0; i < monsterList.Count; i++)
         {
@@ -89,6 +92,11 @@ public class GameManager : MonoBehaviour
             print("Added boredom to monster " + i);
             monsterList[i].GetComponent<MonsterData>().Boredom = loadedBoredom[i];
         }
+        for (int i = 0; i < monsterList.Count; i++)
+        {
+            print("Added boredom to monster " + i);
+            monsterList[i].GetComponent<MonsterData>().Size = loadedSize[i];
+        }
     }
 
     public void SetData()
@@ -96,6 +104,7 @@ public class GameManager : MonoBehaviour
         //setting length of array = length of list in GameManager
         localHunger = new float[monsterList.Count];
         localBoredom = new float[monsterList.Count];
+        localSize = new float[monsterList.Count];
         for (int i = 0; i < localHunger.Length; i++)
         {
             //setting array int values to = hunger in the same oder as the list
@@ -106,6 +115,12 @@ public class GameManager : MonoBehaviour
         {
             //setting array int values to = hunger in the same oder as the list
             localBoredom[i] = monsterList[i].GetComponent<MonsterData>().Boredom;
+
+        }
+        for (int i = 0; i < localSize.Length; i++)
+        {
+            //setting array int values to = hunger in the same oder as the list
+            localSize[i] = monsterList[i].GetComponent<MonsterData>().Size;
 
         }
 
