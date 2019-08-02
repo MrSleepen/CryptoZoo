@@ -28,7 +28,7 @@ public class MonsterData : MonoBehaviour
     private float totHunger;
     private float totBoredom;
     private float NumOfAtts = 2;
-
+    private float TestFloat;
     void Start()
     {
         
@@ -38,7 +38,8 @@ public class MonsterData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GrowthRate);
+         
+       
        
         if (JustBorn == true)
         {
@@ -57,7 +58,11 @@ public class MonsterData : MonoBehaviour
         Hungerslider.value = Hunger;
         BoredumSlider.value = Boredom;
         Happinessslider.value = Happiness;
-        GrowthRate = Happiness;
+        if(fullGrownchecked == false)
+        {
+            GrowthRate = Happiness;
+        }
+        
 
 
         Vector3 theScale = transform.localScale;
@@ -69,7 +74,7 @@ public class MonsterData : MonoBehaviour
         if (gameObject.name == "Monster1")
         {
             monsterType = "Monster1";
-            print("Saving monster 1");
+           // print("Saving monster 1");
         }
         else if (gameObject.name == "Monster2")
         {
@@ -94,6 +99,10 @@ public class MonsterData : MonoBehaviour
         TimerTF = true;
 
         yield return new WaitForSeconds(1);
+
+
+
+        //Hunger Calculations
         if (Hunger >= .01f)
         {
             Hunger -= .01f;
@@ -105,6 +114,8 @@ public class MonsterData : MonoBehaviour
             Hunger = 0;
         }
 
+
+        // Bordom Calculations
         if (Boredom >= .01f)
         {
             Boredom -= .01f;
@@ -115,17 +126,31 @@ public class MonsterData : MonoBehaviour
         {
             Boredom = 0;
         }
-        if(Size <= 1f)
+
+        //Growth Rate and max Size
+         if(Size <= .33f && Size >=0)
         {
-            Size += GrowthRate /100;
+             Size += GrowthRate /100;
+            Debug.Log("Stage1");
+        }
+         else if (Size <= .66f && Size >= .33f)
+        {
+             Size += GrowthRate / 150;
+            Debug.Log("Stage2");
+        }
+         else if (Size <= 1f && Size >= .66f)
+        {
+             Size += GrowthRate / 250;
+            Debug.Log("Stage3");
         }
         else
         {
-            Size = 1;
+            TestFloat = Size = 1;
             if(fullGrownchecked == false)
             {
                 GameManager.Instance.addPlayerXP(500);
                 fullGrownchecked = true;
+                GrowthRate = 0;
             }
         }
 
