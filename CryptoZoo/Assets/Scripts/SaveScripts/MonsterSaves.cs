@@ -6,6 +6,7 @@ public class MonsterSaves{
     public float[] boredomArray;
     public float[] hungerArray;
     public int[] monsterNumValue;
+    public float[] monsterSize;
 
    
     public MonsterSaves (GameManager gameManager)
@@ -17,6 +18,7 @@ public class MonsterSaves{
         hungerArray = gameManager.localHunger;
         boredomArray = gameManager.localBoredom;
         monsterNumValue = gameManager.monsterNumValue;
+        monsterSize = gameManager.localSize;
     }
 
 }
