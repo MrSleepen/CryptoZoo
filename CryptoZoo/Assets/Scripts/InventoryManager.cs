@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour {
     public List<string> invItem;
 
     public int currency;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -18,13 +19,13 @@ public class InventoryManager : MonoBehaviour {
 		
 	}
 
-    void AddItemToInv(string itemToAdd)
+    public void AddItemToInv(string itemToAdd)
     {
         invItem.Add(itemToAdd);
     }
 
-    void AddCurrency()
+    public void AddCurrency(int currencyToAdd)
     {
-        currency += 100;
+        currency += currencyToAdd;
     }
 }
