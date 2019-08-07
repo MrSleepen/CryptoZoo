@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 310103433}
   - component: {fileID: 310103432}
   - component: {fileID: 310103431}
+  - component: {fileID: 310103434}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -190,6 +191,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &310103434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 310103430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6704b7c9bbfffa34fa75f7709691bef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLocation: 
 --- !u!1 &502830878
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +883,7 @@ MonoBehaviour:
   monsterNumValue: 
   localHunger: []
   localBoredom: []
+  localSize: []
   loadedMonsterNumValue: 
 --- !u!4 &1799521472
 Transform:
@@ -1059,6 +1073,7 @@ MonoBehaviour:
   Monster2Prefab: {fileID: 1480518971882036, guid: 2c75810b32351a348a140dd6b3f865a6,
     type: 2}
   MonsterNumber: 1
+  Partslist: 
 --- !u!4 &2084554018
 Transform:
   m_ObjectHideFlags: 0
