@@ -8,55 +8,112 @@ using System;
 
 public class PedoMeter : MonoBehaviour
 {
-    #region
-    private static PedoMeter instance;
-    public static PedoMeter Instance
+    public float LeftRight;
+    public float UpDown;
+    public bool DoOnce;
+    public bool LR;
+    public bool UD;
+
+    public int Steps;
+    
+     public void Update()
     {
-        get
+        Shaking();
+
+        Debug.Log(Steps);
+        ///Debug.Log(Up);
+        // Debug.Log(Right);
+        // Debug.Log(Down);
+
+    }
+
+    private void Shaking()
+    {
+        LeftRight = Input.acceleration.x;
+        UpDown = Input.acceleration.y;
+
+        if(LeftRight > .05f)
         {
-            if(instance == null)
-            {
-                instance =  FindObjectOfType<PedoMeter>();
-                if(instance == null)
-                {
-                    instance = new GameObject("Spawned Accelerometer", typeof(PedoMeter)).GetComponent<PedoMeter>();
+            LR = true;
+        }
+        if (LeftRight < -.05f)
+        {
+            LR = false;
+        }
+        else { LR = false; }
+
+        switch (LR)
+        {
+            case false:
+                if(DoOnce == false) { 
+                AddStep();
+                    DoOnce = true;
                 }
-            }
-            return instance;
+                break;
+            case true:
+                if(DoOnce == true) { 
+                AddStep();
+                DoOnce = false;
+                }
+                break;
         }
-        set
-        {
-            instance = value;
-        }
+         
     }
-    #endregion
-
-    [Header("Shake Detection")]
-    public Action OnShake;
-    [SerializeField] private float shakeDetectionThreshold = 2.0f;
-    private float accelerometerUpdateInterval = 1.0f / 60.0f;
-    private float lowPassKernelWidthInSeconds = 1.0f;
-    private float lowPassFilterFactor;
-    private Vector3 lowPassValue;
-
-    private void Start()
+    private void AddStep()
     {
-        DontDestroyOnLoad(this.gameObject);
-        lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
-        shakeDetectionThreshold *= shakeDetectionThreshold;
-        lowPassValue = Input.acceleration;
-        
+        Steps += 1;
     }
-    private void Update()
-    {
-        Vector3 acceleration = Input.acceleration;
-        lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
-        Vector3 deltaAcceleration = acceleration - lowPassValue;
+    //#region
+    //private static PedoMeter instance;
+    //public static PedoMeter Instance
+    //{
+    //    get
+    //    {
+    //        if (instance == null)
+    //        {
+    //            instance = FindObjectOfType<PedoMeter>();
+    //            if (instance == null)
+    //            {
+    //                instance = new GameObject("Spawned Accelerometer", typeof(PedoMeter)).GetComponent<PedoMeter>();
+    //            }
+    //        }
+    //        return instance;
+    //    }
+    //    set
+    //    {
+    //        instance = value;
+    //    }
+    //}
+    //#endregion
 
-        //Shake Detection
-        if(deltaAcceleration.sqrMagnitude>= shakeDetectionThreshold)
-        
-            OnShake.Invoke();
-        
-    }
+    //[Header("Shake Detection")]
+    //public Action OnShake;
+    //[SerializeField] private float shakeDetectionThreshold = 2.0f;
+    //private float accelerometerUpdateInterval = 1.0f / 60.0f;
+    //private float lowPassKernelWidthInSeconds = 1.0f;
+    //private float lowPassFilterFactor;
+    //private Vector3 lowPassValue;
+
+    //private void Start()
+    //{
+    //    DontDestroyOnLoad(this.gameObject);
+    //    lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
+    //    shakeDetectionThreshold *= shakeDetectionThreshold;
+    //    lowPassValue = Input.acceleration;
+
+    //}
+    //private void Update()
+    //{
+    //    Debug.Log(Input.acceleration);
+    //    Vector3 acceleration = Input.acceleration;
+    //    lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
+    //    Vector3 deltaAcceleration = acceleration - lowPassValue;
+
+    //    //Shake Detection
+    //    if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
+
+    //        OnShake.Invoke();
+
+    //}
+    
 }
