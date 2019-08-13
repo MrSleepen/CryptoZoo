@@ -10,7 +10,8 @@ public class PedoMeter : MonoBehaviour
 {
     public float LeftRight;
     public float UpDown;
-    public bool DoOnce;
+    public bool DoOnce = false;
+    public bool DoOnceUD = false;
     public bool LR;
     public bool UD;
 
@@ -29,18 +30,17 @@ public class PedoMeter : MonoBehaviour
 
     private void Shaking()
     {
-        LeftRight = Input.acceleration.x;
-        UpDown = Input.acceleration.y;
+        LeftRight = Input.acceleration.y;
+        UpDown = Input.acceleration.x;
 
         if(LeftRight > .05f)
         {
-            LR = true;
+           // LR = true;
         }
         if (LeftRight < -.05f)
         {
             LR = false;
         }
-        else { LR = false; }
 
         switch (LR)
         {
@@ -57,7 +57,34 @@ public class PedoMeter : MonoBehaviour
                 }
                 break;
         }
-         
+
+
+          if (UpDown > .05f && LR == false)
+        {
+            UD = true;
+        }
+        if (UpDown < -.05f)
+        {
+            UD = false;
+        }
+
+        switch (UD)
+        {
+            case false:
+                if (DoOnceUD == false)
+                {
+                    AddStep();
+                    DoOnceUD = true;
+                }
+                break;
+            case true:
+                if (DoOnceUD == true)
+                {
+                    AddStep();
+                    DoOnceUD = false;
+                }
+                break;
+        }
     }
     private void AddStep()
     {
