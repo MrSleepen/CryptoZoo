@@ -35,7 +35,7 @@ public class MarketManager : MonoBehaviour {
         if(_Inventory.currency >= item1Cost && button1Text.text != "SOLD OUT")
         {
             _Inventory.currency -= item1Cost;
-            _Inventory.AddItemToInv(Item1);
+            _Inventory.AddItemToInv(Item1, "part");
             button1Text.text = "SOLD OUT";
         }
     }
@@ -44,7 +44,7 @@ public class MarketManager : MonoBehaviour {
         if (_Inventory.currency >= item2Cost && button2Text.text != "SOLD OUT")
         {
             _Inventory.currency -= item2Cost;
-            _Inventory.AddItemToInv(Item2);
+            _Inventory.AddItemToInv(Item2, "part");
             button2Text.text = "SOLD OUT";
         }
     }
@@ -53,7 +53,7 @@ public class MarketManager : MonoBehaviour {
         if (_Inventory.currency >= item3Cost && button3Text.text != "SOLD OUT")
         {
             _Inventory.currency -= item3Cost;
-            _Inventory.AddItemToInv(Item3);
+            _Inventory.AddItemToInv(Item3, "part");
             button3Text.text = "SOLD OUT";
         }
     }
