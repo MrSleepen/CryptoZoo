@@ -63,19 +63,28 @@ public class GameManager : MonoBehaviour
     {
         if (xpNotification != null)
         {
+            //set local variables to = save data
             var localXP = PlayerPrefs.GetInt("playerXP");
             var localLevel = PlayerPrefs.GetInt("playerLevel");
+
+            //set Playerxp to = local experiiance + xp gained
             PlayerPrefs.SetInt("playerXP", localXP += experience);
+
+            //Ui Text for xp
             Text xpText = Instantiate(scrollingTextPrefab, xpNotification.transform);
             xpText.GetComponent<ScrollingText>().Initilize(10, transform.up, "+" + experience, 2);
+
+            //When Character reaches required XP to level up level up and do
             if (PlayerPrefs.GetInt("playerXP") > PlayerPrefs.GetInt("playerXPMax"))
             {
                 print("LEVEL");
                 PlayerPrefs.SetInt("playerLevel", localLevel += 1);
-                PlayerPrefs.SetInt("playerXP", localXP -= 1000);
+                PlayerPrefs.SetInt("playerXP", localXP = 0);
 
                 Text levelText = Instantiate(scrollingTextPrefab, levelNotification.transform);
                 levelText.GetComponent<ScrollingText>().Initilize(30, transform.up, "Level Up!", 2);
+
+                Debug.Log("GM" + experience);
             }
         }
         else
