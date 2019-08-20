@@ -11,6 +11,8 @@ public class OverWorld : MonoBehaviour {
     public GameObject Overworld;
     public GameObject Crib;
     public GameObject WorkBench;
+    public GraveStones SET;
+
   //Function to open Lab called from lab button
     public void LabLoad()
     {
@@ -40,6 +42,7 @@ public class OverWorld : MonoBehaviour {
     {
         GraveYard.SetActive(true);
         Overworld.SetActive(false);
+        SET.reenter();
     }
 
     // Use this for initialization
