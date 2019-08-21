@@ -11,9 +11,10 @@ public class OverWorld : MonoBehaviour {
     public GameObject Overworld;
     public GameObject Crib;
     public GameObject WorkBench;
-    public GraveStones SET;
+    public GraveStones SETGraveYard;
+    public MissionPost SETMission;
 
-  //Function to open Lab called from lab button
+    //Function to open Lab called from lab button
     public void LabLoad()
     {
         Lab.SetActive(true);
@@ -30,6 +31,7 @@ public class OverWorld : MonoBehaviour {
     {
         MissionBoard.SetActive(true);
         Overworld.SetActive(false);
+        SETMission.reentermp();
     }
     //function to open Arena called from button
     public void ArenaLoad()
@@ -42,7 +44,7 @@ public class OverWorld : MonoBehaviour {
     {
         GraveYard.SetActive(true);
         Overworld.SetActive(false);
-        SET.reenter();
+        SETGraveYard.reenter();
     }
 
     // Use this for initialization

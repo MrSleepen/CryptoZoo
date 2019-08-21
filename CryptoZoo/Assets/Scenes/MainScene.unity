@@ -2779,7 +2779,8 @@ MonoBehaviour:
   Overworld: {fileID: 1580809951}
   Crib: {fileID: 201272385}
   WorkBench: {fileID: 83668475}
-  SET: {fileID: 1238425267}
+  SETGraveYard: {fileID: 1238425267}
+  SETMission: {fileID: 0}
 --- !u!1 &1347509901
 GameObject:
   m_ObjectHideFlags: 0
